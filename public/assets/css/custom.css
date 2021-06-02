@@ -1,0 +1,9 @@
+.cakelist.container .card-body{
+	padding: 0.5rem;
+}
+
+.cakelist.container .card-img-top{
+	height:190px;
+	width:auto;
+	max-width:100%;
+}

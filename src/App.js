@@ -1,6 +1,6 @@
 import Navbar from './component/Navbar';
 import Carousel from './component/Carousel';
-import Signup from './component/Signup';
+import LoginSignup from './component/LoginSignup';
 import Cakelist from './component/Cakelist'
 var details ={
 	"userName":"CS",
@@ -12,12 +12,8 @@ function App() {
   <div className="clneocontainer">
     <Navbar details={details} x="10" y="10" phoneNum="123"></Navbar>
 	<Carousel></Carousel>
-	<Signup/>
-	<div className="container mt-4">
-	<div className="row">
+	<LoginSignup/>
 	<Cakelist/>
-	</div>
-	</div>
 	</div>
   );
 }

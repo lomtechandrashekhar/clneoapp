@@ -1,7 +1,18 @@
+import {useState} from "react"
 function Navbar(props){	
+let [loginlogut,setloginlogut]=useState("Login")
 var searchString
 let getSearchString = (event) =>{
 	searchString=event.target.value 
+}
+let toggleloginlogout=(event)=>{
+	
+	var currentVal=event.target.innerHTML
+	if(currentVal==="Login"){
+		setloginlogut("Logout")
+	}else{
+		setloginlogut("Login")
+	}
 }
 let search =()=>{
 	 searchString && console.log(searchString)
@@ -25,6 +36,7 @@ let search =()=>{
 	  />
       <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={search}>Search</button>
     </form>
+	<div ><span onClick={toggleloginlogout}>{loginlogut}</span></div>
   </div>
   </div>
 </nav>
