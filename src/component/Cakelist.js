@@ -5,7 +5,7 @@ import {useState, useEffect} from "react"
 
 function Cakelist(props){
 	var [cakes, setCakes]=useState([])
-	let apiUrl="http://apibyashu.herokuapp.com/api/allcakes"
+	let apiUrl="https://apibyashu.herokuapp.com/api/allcakes"
 	useEffect(() => {
 		axios({url:apiUrl,method:"get"}).then((response)=>{
 			setCakes(response.data.data)

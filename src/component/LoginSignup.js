@@ -1,7 +1,7 @@
 import Login from './Login';
 import Signup from './Signup';
 
-function LoginSignup(){
+function LoginSignup(props){
 	return (
 	<div className="container mt-4">
 	<nav>

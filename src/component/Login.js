@@ -7,7 +7,7 @@ class Login extends Component{
 	constructor(props){
 		super(props)
 		this.emailError=this.passwordError="";
-		this.apiUrl="http://apibyashu.herokuapp.com/api/login"
+		this.apiUrl="https://apibyashu.herokuapp.com/api/login"
 		this.state={
 			email:"",
 			password:"",
@@ -51,7 +51,6 @@ class Login extends Component{
 		if(isValid){
 			axios({url:this.apiUrl,method:"post",data:{"name":this.state.name,"email":this.state.email,"password":this.state.password}}).then((response)=>{
 			if(response.data.email){
-				
 			}
 			if(response.data.message){
 				alert(response.data.message)
