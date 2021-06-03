@@ -12,7 +12,7 @@ function LoginSignup(props){
 </nav>
 <div className="tab-content" id="nav-tabContent">
   <div className="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
-  <Login/>
+  <Login parentprop={props}/>
   </div>
   <div className="tab-pane fade" id="nav-signup" role="tabpanel" aria-labelledby="nav-signup-tab">
   <Signup/>

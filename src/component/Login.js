@@ -51,6 +51,7 @@ class Login extends Component{
 		if(isValid){
 			axios({url:this.apiUrl,method:"post",data:{"name":this.state.name,"email":this.state.email,"password":this.state.password}}).then((response)=>{
 			if(response.data.email){
+				this.props.parentprop.history.push("/")
 			}
 			if(response.data.message){
 				alert(response.data.message)
