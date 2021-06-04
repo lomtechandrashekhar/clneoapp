@@ -16,11 +16,12 @@ function Cakelist(props){
 	return (
 	
 	<div className="container cakelist mt-4">
+	<h2>Cake List</h2>
 	<div className="row">
 	{cakes.map((value,index)=>{
-		let cakeobj={name:value.name, image:value.image, price:value.price}
+		let cakeobj={name:value.name, image:value.image, price:value.price,cakeid:value.cakeid}
 		return(
-		<div key={index} className="col-4">
+		<div key={index} className="col-3">
 		<Cake cake={cakeobj} index={index}/>
 		</div>
 	)})}

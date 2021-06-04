@@ -1,5 +1,7 @@
 import {Component} from "react"
 import axios from 'axios'
+import {withRouter} from "react-router-dom"
+
 class Login extends Component{
 	emailError
 	passwordError
@@ -81,4 +83,4 @@ class Login extends Component{
 }
 
 
-export default Login
+export default withRouter(Login)

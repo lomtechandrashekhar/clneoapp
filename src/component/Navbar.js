@@ -1,13 +1,19 @@
-import {useState} from "react"
-import {Link} from "react-router-dom"
+import {useState, useEffect} from "react"
+import {Link,withRouter} from "react-router-dom"
+import QueryString from "query-string"
 
 function Navbar(props){	
-let [loginlogut,setloginlogut]=useState("Login")
-var searchString
+/*let [loginlogut,setloginlogut]=useState("Login")*/
+var query=QueryString.parse(props.location.search)
+let [searchString,setSearchString]=useState(query.q)
+useEffect (()=>{
+	},[]);
 let getSearchString = (event) =>{
-	searchString=event.target.value 
+	setSearchString(event.target.value )
+	
+	
 }
-let toggleloginlogout=(event)=>{
+/* toggleloginlogout=(event)=>{
 	
 	var currentVal=event.target.innerHTML
 	if(currentVal==="Login"){
@@ -15,9 +21,14 @@ let toggleloginlogout=(event)=>{
 	}else{
 		setloginlogut("Login")
 	}
-}
-let search =()=>{
-	 searchString && console.log(searchString)
+}*/
+let search =(e)=>{
+	e.preventDefault()
+	
+	var url="/search?q="+searchString
+	console.log(url)
+	searchString && props.history.push(url)
+	 searchString && props.history.go(url)
 }
 	return(
 	<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,7 +45,7 @@ let search =()=>{
       </li>      
     </ul>
     <form className="form-inline my-2 my-lg-0">
-      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={getSearchString}
+      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={searchString} onChange={getSearchString}
 	  />
       <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={search}>Search</button>
     </form>
@@ -46,4 +57,4 @@ let search =()=>{
 	);
 }
 
-export default Navbar;
+export default withRouter(Navbar);
