@@ -31,8 +31,8 @@ function CakeDetails(props){
 			}
 		},(error)=>{})
 	}
-	let apiUrl="http://apibyashu.herokuapp.com/api/cake/"+param.cakeid
-	let apiUrl2="http://apibyashu.herokuapp.com/api/searchcakes"
+	let apiUrl="https://apibyashu.herokuapp.com/api/cake/"+param.cakeid
+	let apiUrl2="https://apibyashu.herokuapp.com/api/searchcakes"
 	useEffect (()=>{
 		axios({url:apiUrl,method:"get"}).then((response)=>{
 			console.log(">>>",response.data.data)

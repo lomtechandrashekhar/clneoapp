@@ -9,7 +9,7 @@ function Search(props){
 	useEffect (()=>{
 		let searchUrl
 		console.log(query)
-		if(query) {searchUrl="http://apibyashu.herokuapp.com/api/searchcakes?q="+query.q
+		if(query) {searchUrl="https://apibyashu.herokuapp.com/api/searchcakes?q="+query.q
 		axios({url:searchUrl,method:"get"}).then((response)=>{
 			if(response.data.data){
 				setCakes(response.data.data)
