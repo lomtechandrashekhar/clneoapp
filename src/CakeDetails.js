@@ -35,7 +35,6 @@ function CakeDetails(props){
 	let apiUrl2="https://apibyashu.herokuapp.com/api/searchcakes"
 	useEffect (()=>{
 		axios({url:apiUrl,method:"get"}).then((response)=>{
-			console.log(">>>",response.data.data)
 			if(response.data.message==="Success"){
 				
 				setCake(response.data.data)
@@ -43,7 +42,7 @@ function CakeDetails(props){
 				getMoreCakes(response.data.data.ingredients)
 			}
 		},(error)=>{})
-	},[]);
+	},[param.cakeid]);
 	
 	return(
     <div className="border p-3 main-section">	
@@ -53,7 +52,7 @@ function CakeDetails(props){
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><Link to="/">Home</Link></li>
                                 <li className="breadcrumb-item"><Link to="#">Cakes</Link></li>
-                                <li className="breadcrumb-item active">Accessories</li>
+								{cake.name && <li className="breadcrumb-item active"><CapitalizeText capital="ucword">{cake.name}</CapitalizeText></li>}
                             </ol>
                         </nav>
         </div>

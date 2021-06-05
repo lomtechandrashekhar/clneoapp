@@ -1,7 +1,9 @@
 import Login from './Login';
 import Signup from './Signup';
+import {Redirect} from "react-router-dom"
 
 function LoginSignup(props){
+	if(!localStorage.getItem("cltoken")){
 	return (
 	<div className="container mt-4">
 	<nav>
@@ -20,6 +22,9 @@ function LoginSignup(props){
 </div>
 </div>
 	)
+	}else{
+		return (<Redirect to="/"/>)
+	}
 }
 
 export default LoginSignup

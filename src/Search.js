@@ -8,7 +8,6 @@ function Search(props){
 	var [cakes, setCakes]=useState([]);
 	useEffect (()=>{
 		let searchUrl
-		console.log(query)
 		if(query) {searchUrl="https://apibyashu.herokuapp.com/api/searchcakes?q="+query.q
 		axios({url:searchUrl,method:"get"}).then((response)=>{
 			if(response.data.data){
@@ -16,11 +15,11 @@ function Search(props){
 			}
 		},(error)=>{})
 		}
-	},[]);
+	},[query.q]);
 	
 	return (
-	<div className="container cakelist ">
-
+	<div className="container mt-4 cakelist ">
+<div className="row">
     <div className="mb20 col-md-12">
 		<h1>Search Results</h1>
 		<h2 className="lead"><strong className="text-danger">{cakes.length}</strong> Cakes were found for the search <strong className="text-danger">{query&&query.q}</strong></h2>								
@@ -38,6 +37,7 @@ function Search(props){
 	</div>
 
 	</section>
+	</div>
 </div>
 	)
 	

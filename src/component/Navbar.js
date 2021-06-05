@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react"
 import {Link,withRouter} from "react-router-dom"
 import QueryString from "query-string"
+import CapitalizeText from "./CapitalizeText"
 
 function Navbar(props){	
 /*let [loginlogut,setloginlogut]=useState("Login")*/
@@ -26,32 +27,43 @@ let search =(e)=>{
 	e.preventDefault()
 	
 	var url="/search?q="+searchString
-	console.log(url)
 	searchString && props.history.push(url)
-	 searchString && props.history.go(url)
 }
 	return(
 	<nav className="navbar navbar-expand-lg navbar-light bg-light">
 	<div className="container">
+	<div className="row w-100 d-flex">
+	<div className="col-4 text-left">
   <Link className="navbar-brand" to="/">{props.details.projectName}</Link>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-
-  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav mr-auto">
-      <li className="nav-item">
-        <a className="nav-link" href="/">{props.details.userName}</a>
-      </li>      
-    </ul>
-    <form className="form-inline my-2 my-lg-0">
+</div>
+<div className="col-4 text-center">
+    <form className="form-inline my-2 my-lg-0 justify-content-center">
       <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={searchString} onChange={getSearchString}
 	  />
       <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={search}>Search</button>
     </form>
+	</div>
 	{/*<div ><span onClick={toggleloginlogout}>{loginlogut}</span></div>*/}
-	<div><Link to="/signup">Login / Signup </Link></div>
+		
+	<div className="col-4 d-flex align-items-center flex-row-reverse">
+	
+	
+	{props.user.name && 
+		<div className="dropdown d-inline-block">
+  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Hi <CapitalizeText>{props.user.name}</CapitalizeText>,
+  </button>
+  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <Link to="/my-account" className="d-block p-2">My Account</Link>
+	<Link to="/my-orders" className="d-block p-2">My Orders</Link>
+	<Link to="/logout" className="d-block p-2">Logout</Link>
   </div>
+</div>
+		}
+	{!props.user.name && <Link to="/signup">Login / Signup </Link>}
+	<Link to="/cart" className="mr-3"><i className="fa fa-shopping-cart"></i></Link>
+	</div>
+	</div>
   </div>
 </nav>
 	);

@@ -53,7 +53,10 @@ class Login extends Component{
 		if(isValid){
 			axios({url:this.apiUrl,method:"post",data:{"name":this.state.name,"email":this.state.email,"password":this.state.password}}).then((response)=>{
 			if(response.data.email){
-				this.props.parentprop.history.push("/")
+				localStorage.setItem("cltoken", response.data.token);
+				console.log(this.props.parentprop)
+				this.props.parentprop.parentfun()
+				this.props.history.push("/")
 			}
 			if(response.data.message){
 				alert(response.data.message)

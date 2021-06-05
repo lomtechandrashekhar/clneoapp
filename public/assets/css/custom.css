@@ -9,9 +9,16 @@
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    background-color: #f5f5f5
+    background-color: #fff
 }
-
+a{
+	color:rgba(0,0,0,.9);
+	text-decoration:none;
+}
+a:hover{
+	color:#059862;
+	text-decoration:none;
+}
 .hedding {
     font-size: 20px;
     color: #ab8181`;
