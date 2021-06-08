@@ -2,11 +2,19 @@ import {useState, useEffect} from "react"
 import {Link,withRouter} from "react-router-dom"
 import QueryString from "query-string"
 import CapitalizeText from "./CapitalizeText"
+import {connect} from "react-redux"
 
 function Navbar(props){	
 /*let [loginlogut,setloginlogut]=useState("Login")*/
+let logout=(e)=>{
+	e.preventDefault()
+	props.dispatch({
+					type:"LOGOUT",
+	})
+}
 var query=QueryString.parse(props.location.search)
-let [searchString,setSearchString]=useState(query.q)
+let querystring=(query&&query.q)?query.q:""
+let [searchString,setSearchString]=useState(querystring)
 useEffect (()=>{
 	},[]);
 let getSearchString = (event) =>{
@@ -46,21 +54,19 @@ let search =(e)=>{
 	{/*<div ><span onClick={toggleloginlogout}>{loginlogut}</span></div>*/}
 		
 	<div className="col-4 d-flex align-items-center flex-row-reverse">
-	
-	
-	{props.user.name && 
+	{props.isLoggedIn && 
 		<div className="dropdown d-inline-block">
   <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Hi <CapitalizeText>{props.user.name}</CapitalizeText>,
+    Hi {props.username && <CapitalizeText>{props.username}</CapitalizeText>},
   </button>
   <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <Link to="/my-account" className="d-block p-2">My Account</Link>
 	<Link to="/my-orders" className="d-block p-2">My Orders</Link>
-	<Link to="/logout" className="d-block p-2">Logout</Link>
+	<a onClick={logout} href="/" className="d-block p-2">Logout</a>
   </div>
 </div>
 		}
-	{!props.user.name && <Link to="/signup">Login / Signup </Link>}
+	{!props.isLoggedIn && <Link to="/signup">Login / Signup </Link>}
 	<Link to="/cart" className="mr-3"><i className="fa fa-shopping-cart"></i></Link>
 	</div>
 	</div>
@@ -68,5 +74,10 @@ let search =(e)=>{
 </nav>
 	);
 }
-
-export default withRouter(Navbar);
+let NavbarComponent= withRouter(Navbar)
+export default connect(function(state){
+	return {
+		username:state.username,
+		isLoggedIn:state.isLoggedIn
+	}
+})(NavbarComponent);

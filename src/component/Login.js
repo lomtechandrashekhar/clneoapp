@@ -1,6 +1,7 @@
 import {Component} from "react"
 import axios from 'axios'
 import {withRouter} from "react-router-dom"
+import {connect} from "react-redux"
 
 class Login extends Component{
 	emailError
@@ -53,9 +54,17 @@ class Login extends Component{
 		if(isValid){
 			axios({url:this.apiUrl,method:"post",data:{"name":this.state.name,"email":this.state.email,"password":this.state.password}}).then((response)=>{
 			if(response.data.email){
+				this.props.dispatch({
+					type:"LOGIN",
+					payload:{
+						token:response.data.token,
+						username:response.data.name
+					}
+				})
 				localStorage.setItem("cltoken", response.data.token);
-				console.log(this.props.parentprop)
-				this.props.parentprop.parentfun()
+				localStorage.setItem("username", response.data.name);
+				//console.log(this.props.parentprop)
+				//this.props.parentprop.parentfun()
 				this.props.history.push("/")
 			}
 			if(response.data.message){
@@ -75,7 +84,7 @@ class Login extends Component{
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputLoginPassword1">Password</label>
-    <input type="password" className="form-control" id="exampleInputLoginPassword1" placeholder="Password"  value={this.state.password} onChange={this.changePassword}/>
+    <input type="password" autoComplete="false" className="form-control" id="exampleInputLoginPassword1" placeholder="Password"  value={this.state.password} onChange={this.changePassword}/>
   {this.passwordError && <small id="passwordError" className="form-text form-error alert alert-danger">{this.passwordError}</small>}
   </div>
   <button type="submit" className="btn btn-primary">Submit</button>
@@ -85,5 +94,6 @@ class Login extends Component{
 	
 }
 
+let LoginComponent=withRouter(Login)
 
-export default withRouter(Login)
+export default connect()(LoginComponent)

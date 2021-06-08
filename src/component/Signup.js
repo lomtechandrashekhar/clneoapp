@@ -105,12 +105,12 @@ class Signup extends Component{
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"  value={this.state.password} onChange={this.changePassword}/>
+    <input type="password" autoComplete="false" className="form-control" id="exampleInputPassword1" placeholder="Password"  value={this.state.password} onChange={this.changePassword}/>
    {this.passwordError && <small id="passwordError" className="form-text form-error alert alert-danger">{this.passwordError}</small>}
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">Confirm Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Confirm Password"  value={this.state.password2} onChange={this.changePassword2}/>
+    <input type="password" autoComplete="false" className="form-control" id="exampleInputPassword2" placeholder="Confirm Password"  value={this.state.password2} onChange={this.changePassword2}/>
   {this.password2Error && <small id="password2Error" className="form-text form-error alert alert-danger">{this.password2Error}</small>}
   </div>
   <button type="submit" className="btn btn-primary">Submit</button>
