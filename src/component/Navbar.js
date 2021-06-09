@@ -77,7 +77,7 @@ let search =(e)=>{
 let NavbarComponent= withRouter(Navbar)
 export default connect(function(state){
 	return {
-		username:state.username,
-		isLoggedIn:state.isLoggedIn
+		username:state.AuthReducer.username,
+		isLoggedIn:state.AuthReducer.isLoggedIn
 	}
 })(NavbarComponent);

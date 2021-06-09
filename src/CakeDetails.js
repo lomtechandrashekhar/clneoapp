@@ -3,6 +3,7 @@ import {useEffect, useState } from "react"
 import axios from 'axios'
 import CapitalizeText from "./component/CapitalizeText"
 import Cake from './component/Cake';
+import {connect} from "react-redux"
 
 function CakeDetails(props){
 	let param =useParams();
@@ -10,6 +11,19 @@ function CakeDetails(props){
 	var [morecakes, setMoreCakes]=useState([]);
 	var [ratingWidth, setRatingWidth]=useState(0);
 	var [quantity, setQty]=useState(1);
+	let addtocart = (e)=>{
+		e.preventDefault()
+		let apiUrl="https://apibyashu.herokuapp.com/api/addcaketocart"
+		axios({url:apiUrl,method:"post",headers:{authtoken:props.token}, data:{...cake}}).then((response)=>{
+			if(response.data.data){
+				props.dispatch({
+					type:"ADDTOCART",
+					payload:{cartdata:response.data.data}
+				})
+			}
+			alert(response.data.message)
+		},(error)=>{})
+	}
 	let starWidth=(value)=>{
 		
 		let ratingString=(Math.max(0, (Math.min(5, parseFloat(value)))) * 16)+"px";
@@ -118,7 +132,7 @@ function CakeDetails(props){
                         <div className="col-lg-12 mt-3">
                             <div className="row">
                                 <div className="col-lg-12 pb-2">
-                                    <a href="/cart" className="btn btn-danger w-100">Add To Cart</a>
+                                    <a href="/cart" className="btn btn-danger w-100" onClick={addtocart}>Add To Cart</a>
                                 </div>
                             </div>
                         </div>
@@ -154,4 +168,8 @@ function CakeDetails(props){
 	)
 }
 
-export default CakeDetails
+export default connect(function(state){
+	return {
+		token:state.AuthReducer.token
+	}
+})(CakeDetails)
