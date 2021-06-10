@@ -55,7 +55,7 @@ let search =(e)=>{
 		
 	<div className="col-4 d-flex align-items-center flex-row-reverse">
 	{props.isLoggedIn && 
-		<div className="dropdown d-inline-block">
+		<><div className="dropdown d-inline-block">
   <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Hi {props.username && <CapitalizeText>{props.username}</CapitalizeText>},
   </button>
@@ -64,10 +64,9 @@ let search =(e)=>{
 	<Link to="/my-orders" className="d-block p-2">My Orders</Link>
 	<a onClick={logout} href="/" className="d-block p-2">Logout</a>
   </div>
-</div>
+</div><Link to="/cart" className="mr-3"><i className="fa fa-shopping-cart"></i></Link></>
 		}
 	{!props.isLoggedIn && <Link to="/signup">Login / Signup </Link>}
-	<Link to="/cart" className="mr-3"><i className="fa fa-shopping-cart"></i></Link>
 	</div>
 	</div>
   </div>

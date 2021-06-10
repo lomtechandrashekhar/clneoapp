@@ -1,7 +1,7 @@
 import {Component} from "react"
-import axios from 'axios'
 import {withRouter} from "react-router-dom"
 import {connect} from "react-redux"
+import loginmiddleware from "../middleware"
 
 class Login extends Component{
 	emailError
@@ -28,6 +28,7 @@ class Login extends Component{
 		})
 	}
 	
+	
 	validateEmail=(event)=>{
 		this.emailError=this.passwordError="";
 		event.preventDefault()
@@ -52,25 +53,8 @@ class Login extends Component{
 			passwordError:this.passwordError,
 		})
 		if(isValid){
-			axios({url:this.apiUrl,method:"post",data:{"name":this.state.name,"email":this.state.email,"password":this.state.password}}).then((response)=>{
-			if(response.data.email){
-				this.props.dispatch({
-					type:"LOGIN",
-					payload:{
-						token:response.data.token,
-						username:response.data.name
-					}
-				})
-				localStorage.setItem("cltoken", response.data.token);
-				localStorage.setItem("username", response.data.name);
-				//console.log(this.props.parentprop)
-				//this.props.parentprop.parentfun()
-				this.props.history.push("/")
-			}
-			if(response.data.message){
-				alert(response.data.message)
-			}
-		},(error)=>{})
+			let middle=loginmiddleware(this.state)
+			this.props.dispatch(middle)
 		}
 	}
 	
@@ -94,6 +78,11 @@ class Login extends Component{
 	
 }
 
-let LoginComponent=withRouter(Login)
+Login=connect(function(state,props){
+	if(state.AuthReducer?.isLoggedIn){
+		props.history.push("/")
+	}
+	return props
+})(Login)
 
-export default connect()(LoginComponent)
+export default withRouter(Login)

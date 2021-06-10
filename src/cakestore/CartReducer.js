@@ -15,8 +15,14 @@ function CartReducer(state={
 		state={...state}
 		return state
 		
+		case "UPDATE_CART":
+		state={...state}
+		state.cart=action.payload.cart
+		return state
+		
 		case "EMPTYCART":
 		state={...state}
+		state.cart=[];
 		return state
 		
 		default: return state
