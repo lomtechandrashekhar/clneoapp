@@ -10,7 +10,7 @@ class Login extends Component{
 	constructor(props){
 		super(props)
 		this.emailError=this.passwordError="";
-		this.apiUrl="https://apibyashu.herokuapp.com/api/login"
+		this.apiUrl=process.env.REACT_APP_BASE_URL+"/login"
 		this.state={
 			email:"",
 			password:"",

@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import CartCake from "./component/CartCake"
 
 function Cart(props) {
+	console.log(props.cartUpdated)
 	let carttotal=0
 	if(!props.isLoggedIn){
 		console.log(props)
@@ -11,7 +12,7 @@ function Cart(props) {
 	return <></>
 	}else{
   return (
-  
+
   <div className="mt-4 container cart-container"><div className="card">
     <div className="row">
         <div className="col-md-8 cart">
@@ -59,5 +60,5 @@ function Cart(props) {
 }
 
 export default connect(function(state){
-	return {cart:state.CartReducer.cart,isLoggedIn:state.AuthReducer?.isLoggedIn}
+	return {cart:state.CartReducer.cart,isLoggedIn:state.AuthReducer?.isLoggedIn,cartUpdated:state.CartReducer.cartUpdated}
 })(Cart);

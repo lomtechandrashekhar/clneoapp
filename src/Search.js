@@ -8,7 +8,7 @@ function Search(props){
 	var [cakes, setCakes]=useState([]);
 	useEffect (()=>{
 		let searchUrl
-		if(query) {searchUrl="https://apibyashu.herokuapp.com/api/searchcakes?q="+query.q
+		if(query) {searchUrl=process.env.REACT_APP_BASE_URL+"/searchcakes?q="+query.q
 		axios({url:searchUrl,method:"get"}).then((response)=>{
 			if(response.data.data){
 				setCakes(response.data.data)

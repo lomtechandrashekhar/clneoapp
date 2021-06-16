@@ -2,6 +2,8 @@ import {createStore,combineReducers,applyMiddleware} from "redux"
 import AuthReducer from "./AuthReducer"
 import CartReducer from "./CartReducer"
 import thunk from "redux-thunk"
+import CreateSaga from "redux-saga"
+import RootSagas from "./sagas" 
 
 let middle=store=>next=>action=>{
 	console.log("Action "+action.type+" is called at "+ new Date())
@@ -12,7 +14,11 @@ let middle=store=>next=>action=>{
 	}
 	next(action)
 }
+
+let SagaMiddleware=CreateSaga()
+
 let reducers=combineReducers({AuthReducer,CartReducer})
-let store = createStore(reducers,applyMiddleware(middle,thunk))
+let store = createStore(reducers,applyMiddleware(middle,thunk,SagaMiddleware))
+SagaMiddleware.run(RootSagas)
 
 export default store

@@ -9,7 +9,7 @@ class Signup extends Component{
 	apiUrl
 	constructor(props){
 		super(props)
-		this.apiUrl="https://apibyashu.herokuapp.com/api/register"
+		this.apiUrl=process.env.REACT_APP_BASE_URL+"/register"
 		this.emailError=this.nameError=this.passwordError=this.password2Error="";
 		this.state={
 			name:"",
