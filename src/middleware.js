@@ -9,11 +9,24 @@ function loginmiddleware(data){
 					type:"LOGIN",
 					payload:{
 						token:response.data.token,
-						username:response.data.name
+						username:response.data.name,
+						email:response.data.email,
 					}
 				})
 				localStorage.setItem("cltoken", response.data.token);
 				localStorage.setItem("username", response.data.name);
+				localStorage.setItem("email", response.data.email);
+				let cakecarturl=process.env.REACT_APP_BASE_URL+"/cakecart"
+				axios({url:cakecarturl,method:"post",data:{}}).then((response)=>{
+					if(response.data.data){
+						dispatch({
+							type:"UPDATE_CART",
+							payload:{
+								cart:response.data.data,
+							}
+						})
+					}
+				},(error)=>{})
 				//console.log(this.props.parentprop)
 				//this.props.parentprop.parentfun()
 				//this.props.history.push("/")

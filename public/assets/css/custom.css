@@ -127,7 +127,7 @@ span.stars>*{
     padding: 0
 }
 
-.cart-container .row {
+.cart-container .row:not(.keep-margin) {
     margin: 0
 }
 
@@ -137,7 +137,7 @@ span.stars>*{
 
 .cart-container .main {
     margin: 0;
-    padding: 2vh 0;
+    padding: 3vh 0;
     width: 100%
 }
 
@@ -202,9 +202,9 @@ span.stars>*{
     border-color: #000;
     color: white;
     width: 100%;
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin-top: 4vh;
-    padding: 1vh;
+    padding: 1.5vh;
     border-radius: 0
 }
 
@@ -231,7 +231,9 @@ span.stars>*{
     background-position-y: center
 }
 
-
+.accordion .card-header{
+	cursor: pointer;
+}
 
 @media (min-width:360px) and (max-width:640px) {
     .pro-box-section .pro-box img {

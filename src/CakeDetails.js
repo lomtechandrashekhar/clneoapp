@@ -10,7 +10,6 @@ function CakeDetails(props){
 	var [cake, setCake]=useState([]);
 	var [morecakes, setMoreCakes]=useState([]);
 	var [ratingWidth, setRatingWidth]=useState(0);
-	var [quantity, setQty]=useState(1);
 	let addtocart = (e)=>{
 		e.preventDefault()
 		if(!props.isLoggedIn){
@@ -18,7 +17,7 @@ function CakeDetails(props){
 			return false
 		}
 		let apiUrl=process.env.REACT_APP_BASE_URL+"/addcaketocart"
-		axios({url:apiUrl,method:"post",headers:{authtoken:props.token}, data:{...cake}}).then((response)=>{
+		axios({url:apiUrl,method:"post", data:{...cake}}).then((response)=>{
 			if(response.data.data){
 				props.dispatch({
 					type:"ADDTOCART",
@@ -33,9 +32,7 @@ function CakeDetails(props){
 		let ratingString=(Math.max(0, (Math.min(5, parseFloat(value)))) * 16)+"px";
 		setRatingWidth(ratingString)
 	}
-	let quantityChange=(e)=>{
-		setQty(e.target.value);
-	}
+
 	let getMoreCakes=(ingredients)=>{
 		let type=""
 		ingredients.map((value,index)=>{
@@ -128,10 +125,6 @@ function CakeDetails(props){
 											</div>
 										</div>
 									</div>
-								</div>
-								<div className="col-lg-12">
-									<h6>Quantity :</h6>
-									<input type="number" name="quntity" className="form-control text-center w-100" value={quantity} onChange={quantityChange}/>
 								</div>
 								<div className="col-lg-12 mt-3">
 									<div className="row">

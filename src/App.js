@@ -16,7 +16,7 @@ var details ={
 	"projectName":"My cake shop",
 }
 axios.interceptors.request.use((request)=>{
-	if(request.url.includes("cart") || request.url.includes("checkout")){
+	if(request.url.includes("cart") || request.url.includes("checkout") || request.url.includes("order")){
 		request.headers["authtoken"]=localStorage.cltoken
 	}
 	return request
@@ -42,6 +42,21 @@ function App(props) {
 			},(error)=>{})
 		}
 	},[props.cartUpdated])
+	useEffect(()=>{
+		if(props.isLoggedIn){
+			let apiUrl=process.env.REACT_APP_BASE_URL+"/cakeorders"
+			axios({url:apiUrl,method:"post",data:{},headers:{authtoken:props.token}}).then((response)=>{
+				if(response.data.cakeorders){
+					props.dispatch({
+						type:"UPDATE_ORDER",
+						payload:{
+							cakeorders:response.data.cakeorders,
+						}
+					})
+				}
+			},(error)=>{})
+		}
+	},[props.orderUpdated])
 	return (
 		<div className="clneocontainer">
 			<Router>
@@ -64,6 +79,7 @@ export default connect(function(state){
 		token:state.AuthReducer.token,
 		isLoggedIn:state.AuthReducer.isLoggedIn,
 		cart:state.CartReducer.cart,
-		cartUpdated:state.CartReducer.cartUpdated
+		cartUpdated:state.CartReducer.cartUpdated,
+		orderUpdated:state.AccountReducer.orderUpdated
 	}
 })(App);

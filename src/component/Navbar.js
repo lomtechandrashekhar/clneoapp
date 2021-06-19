@@ -4,7 +4,7 @@ import QueryString from "query-string"
 import CapitalizeText from "./CapitalizeText"
 import {connect} from "react-redux"
 
-function Navbar(props){	
+function Navbar(props){
 /*let [loginlogut,setloginlogut]=useState("Login")*/
 let logout=(e)=>{
 	e.preventDefault()
@@ -19,11 +19,11 @@ useEffect (()=>{
 	},[]);
 let getSearchString = (event) =>{
 	setSearchString(event.target.value )
-	
-	
+
+
 }
 /* toggleloginlogout=(event)=>{
-	
+
 	var currentVal=event.target.innerHTML
 	if(currentVal==="Login"){
 		setloginlogut("Logout")
@@ -33,7 +33,7 @@ let getSearchString = (event) =>{
 }*/
 let search =(e)=>{
 	e.preventDefault()
-	
+
 	var url="/search?q="+searchString
 	searchString && props.history.push(url)
 }
@@ -52,19 +52,21 @@ let search =(e)=>{
     </form>
 	</div>
 	{/*<div ><span onClick={toggleloginlogout}>{loginlogut}</span></div>*/}
-		
+
 	<div className="col-4 d-flex align-items-center flex-row-reverse">
-	{props.isLoggedIn && 
+	{props.isLoggedIn &&
 		<><div className="dropdown d-inline-block">
   <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Hi {props.username && <CapitalizeText>{props.username}</CapitalizeText>},
   </button>
   <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <Link to="/my-account" className="d-block p-2">My Account</Link>
-	<Link to="/my-orders" className="d-block p-2">My Orders</Link>
+    <Link to="/account" className="d-block p-2">My Account</Link>
+	<Link to="/account/orders" className="d-block p-2">My Orders</Link>
 	<a onClick={logout} href="/" className="d-block p-2">Logout</a>
   </div>
-</div><Link to="/cart" className="mr-3"><i className="fa fa-shopping-cart"></i></Link></>
+</div><Link to="/cart" className="mr-3"><i className="fa fa-shopping-cart"></i></Link>
+{(props.email=="lomtechandrashekhar@gmail.com" || props.email=="ashu.lekhi0540@gmail.com")&& <Link to="/account/addcake" className="mr-3">Admin</Link>}
+</>
 		}
 	{!props.isLoggedIn && <Link to="/signup">Login / Signup </Link>}
 	</div>
@@ -77,6 +79,7 @@ let NavbarComponent= withRouter(Navbar)
 export default connect(function(state){
 	return {
 		username:state.AuthReducer.username,
-		isLoggedIn:state.AuthReducer.isLoggedIn
+		isLoggedIn:state.AuthReducer.isLoggedIn,
+		email:state.AuthReducer.email
 	}
 })(NavbarComponent);
