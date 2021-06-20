@@ -7,7 +7,6 @@ import {connect} from "react-redux"
 import AddCake from "./component/AddCake"
 
 function Account(props) {
-  console.log(props.email)
   return (
 <div className="mt-4 container">
 <div className="row">
@@ -17,7 +16,7 @@ function Account(props) {
 </div>
 	<div className=" bd-example bd-example-tabs">
 		<div className="row checkout-row mt-4">
-      <nav class="nav">
+      <nav className="nav">
         <Link to="/account/summary" className="text-decoration-none border p-2 ">My Account</Link>
         <Link to="/account/orders" className="text-decoration-none border p-2">Orders</Link>
 </nav>

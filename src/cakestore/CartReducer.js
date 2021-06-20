@@ -31,6 +31,12 @@ function CartReducer(state={
 
 		return state
 
+		case "REMOVE_CAKE_FROM_CART":
+		state={...state}
+		state.cartUpdated=state.cartUpdated+1
+
+		return state
+
 
 		case "EMPTYCART":
 		state={...state}

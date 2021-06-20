@@ -1,18 +1,6 @@
 import {all, call, takeEvery,put} from "redux-saga/effects"
 import axios from 'axios'
 
-function AddCake(action){
-}
-
-
-
-function *AddCakeMiddleware(action,props){
-yield call(AddCake,action)
-}
-
-function *AddCakeSaga(){
-	yield takeEvery("ADD_CAKE",AddCakeMiddleware)
-}
 
 function DecreaseQty(action){
 	let apiUrl=process.env.REACT_APP_BASE_URL+"/removeonecakefromcart"
@@ -31,6 +19,21 @@ function *DecreaseQtySaga(){
 	yield takeEvery("DECREASE_QTY",DecreaseQtyMiddleware)
 }
 
+function *RemoveItemFromCartMiddleware(action,props){
+	let apiUrl=process.env.REACT_APP_BASE_URL+"/removecakefromcart"
+	var response=	yield axios({url:apiUrl,method:"post", data:{cakeid:action.payload.cakeid}})
+	if(response.data.data){
+		yield put({type:"REMOVE_CAKE_FROM_CART",payload:{cartdata:response.data.data}})
+	}
+
+alert(response.data.message)
+}
+
+function *RemoveItemFromCartSaga(){
+	yield takeEvery("REMOVE_CAKE_FROM_CART",RemoveItemFromCartMiddleware)
+}
+
+
 function *IncreaseQtyMiddleware(action,props){
 	let apiUrl=process.env.REACT_APP_BASE_URL+"/addcaketocart"
 	var response=	yield axios({url:apiUrl,method:"post", data:action.payload})
@@ -46,7 +49,7 @@ function *IncreaseQtySaga(){
 }
 
 function *PlaceOrderMiddleware(action,props){
-	
+
 	let apiUrl=process.env.REACT_APP_BASE_URL+"/addcakeorder"
 	var response=	yield axios({url:apiUrl,method:"post", data:action.payload})
 	console.log(response.data,response.data.order)
@@ -61,6 +64,21 @@ function *PlaceOrderSaga(){
 	yield takeEvery("PLACE_ORDER",PlaceOrderMiddleware)
 }
 
+function *AddCakeMiddleware(action,props){
+
+	let apiUrl=process.env.REACT_APP_BASE_URL+"/addcake"
+	var response=	yield axios({url:apiUrl,method:"post", data:action.payload})
+	if(response.data.data){
+		yield put({type:"CLEAR_CAKE"})
+	}
+
+alert(response.data.message)
+}
+
+function *AddCakeSaga(){
+	yield takeEvery("ADD_CAKE",AddCakeMiddleware)
+}
+
 export default function *RootSagas(){
-	yield all([AddCakeSaga(),DecreaseQtySaga(),IncreaseQtySaga(),PlaceOrderSaga()])
+	yield all([RemoveItemFromCartSaga(),DecreaseQtySaga(),IncreaseQtySaga(),PlaceOrderSaga(),AddCakeSaga()])
 }

@@ -19,6 +19,14 @@ function CartCake(props){
 	})
 	}
 
+	let removeItemFromCart=(e)=>{
+		e.preventDefault();
+	props.dispatch({
+		type:"REMOVE_CAKE_FROM_CART",
+		payload:{cakeid:props.cake.cakeid}
+	})
+	}
+
 
 	return(
 	<div className="row border-top border-bottom" id={props.index}>
@@ -35,7 +43,7 @@ function CartCake(props){
 										</div>
 										 </div>
                     <div className="col text-right">&#8377; {props.cake.price}</div>
-										{props.iscart && <div className="col text-right"><span className="close">&#10005;</span></div>}
+										{props.iscart && <div className="col text-right"><span className="close" onClick={removeItemFromCart} >&#10005;</span></div>}
 								</div>
             </div>
 )

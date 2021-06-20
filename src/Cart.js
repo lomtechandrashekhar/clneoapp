@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import CartCake from "./component/CartCake"
 
 function Cart(props) {
+	console.log(props.cart)
 	let carttotal=0
 	if(!props.isLoggedIn){
 		console.log(props)

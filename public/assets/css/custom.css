@@ -184,7 +184,7 @@ span.stars>*{
     background-color: rgb(247, 247, 247)
 }
 
-.cart-container input {
+.cart-container input["type=text"] {
     border: 1px solid rgba(0, 0, 0, 0.137);
     padding: 1vh;
     margin-bottom: 4vh;
@@ -229,6 +229,10 @@ span.stars>*{
     background-repeat: no-repeat;
     background-position-x: 95%;
     background-position-y: center
+}
+
+.ingredients-wrap i{
+	cursor: pointer;
 }
 
 .accordion .card-header{

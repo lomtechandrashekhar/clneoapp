@@ -16,7 +16,7 @@ var details ={
 	"projectName":"My cake shop",
 }
 axios.interceptors.request.use((request)=>{
-	if(request.url.includes("cart") || request.url.includes("checkout") || request.url.includes("order")){
+	if(request.url.includes("cart") || request.url.includes("checkout") || request.method == 'post'){
 		request.headers["authtoken"]=localStorage.cltoken
 	}
 	return request
